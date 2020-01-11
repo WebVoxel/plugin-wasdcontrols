@@ -4,9 +4,10 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "0.0.1-a1",
+  "version": "0.0.1-a2",
   "description": "WASD controls for WebVoxel",
   "main": "dist/wv-plugin-wasdcontrols.min.js",
+  "module": "src/index.js",
   "repository": "https://github.com/WebVoxel/wv-plugin-wasdcontrols.git",
   "author": "Landon Gravat <railinator4903@gmail.com>",
   "license": "MIT",
