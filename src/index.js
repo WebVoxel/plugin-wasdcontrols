@@ -1,5 +1,6 @@
 import { Plugin } from '@webvoxel/core';
 import * as THREE from 'three';
+import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls';
 
 export class WASDControlsPlugin extends Plugin {
     constructor() {
@@ -17,11 +18,11 @@ export class WASDControlsPlugin extends Plugin {
     }
 
     init() {
+		this.controls = new PointerLockControls(this.game.camera, document.body);
         this.on('before_load', () => {
-            this.currentWorld.scene.add(this.controls.getObject());
+            this.game.currentWorld.scene.add(this.controls.getObject());
             document.addEventListener('keydown', this.onKeyDown, false);
             document.addEventListener('keyup', this.onKeyUp, false);
-            this.controls = new PointerLockControls(this.game.camera, document.body);
         });
 
         this.on('animate', () => {
