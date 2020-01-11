@@ -1,0 +1,26 @@
+{
+  "name": "@webvoxel/plugin-wasdcontrols",
+  "bundleName": "wv-plugin-wasdcontrols",
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "0.0.1-a1",
+  "description": "WASD controls for WebVoxel",
+  "main": "dist/wv-plugin-wasdcontrols.min.js",
+  "repository": "https://github.com/WebVoxel/wv-plugin-wasdcontrols.git",
+  "author": "Landon Gravat <railinator4903@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "webpack --config webpack.dev.js",
+    "package": "webpack --config webpack.prod.js",
+    "prepublishOnly": "yarn package"
+  },
+  "dependencies": {
+    "@webvoxel/core": "^0.0.1-a5"
+  },
+  "devDependencies": {
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1"
+  }
+}
