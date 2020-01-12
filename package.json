@@ -20,6 +20,8 @@
     "@webvoxel/core": "^0.0.1-a5"
   },
   "devDependencies": {
+    "typescript": "^3.7.4",
+    "awesome-typescript-loader": "^5.2.1",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.10.1"

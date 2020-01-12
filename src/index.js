@@ -12,6 +12,7 @@ export class WASDControlsPlugin extends Plugin {
         this.moveLeft = false;
         this.moveForward = false;
         this.moveBackward = false;
+        this.ready = false;
 
 		this.onKeyDown = this.onKeyDown.bind(this);
 		this.onKeyUp = this.onKeyUp.bind(this);
@@ -23,6 +24,7 @@ export class WASDControlsPlugin extends Plugin {
             this.game.currentWorld.scene.add(this.controls.getObject());
             document.addEventListener('keydown', this.onKeyDown, false);
             document.addEventListener('keyup', this.onKeyUp, false);
+            this.ready = true;
         });
 
         this.on('animate', () => {
