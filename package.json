@@ -5,7 +5,7 @@
     "access": "public"
   },
   "types": "src/index.d.ts",
-  "version": "0.0.1-r4",
+  "version": "0.0.1-r5",
   "description": "WASD controls for WebVoxel",
   "main": "dist/wv-plugin-wasdcontrols.min.js",
   "module": "src/index.js",
@@ -18,7 +18,7 @@
     "prepublishOnly": "yarn package"
   },
   "dependencies": {
-    "@webvoxel/core": "^0.0.1-r2"
+    "@webvoxel/core": "^0.0.1-r3"
   },
   "devDependencies": {
     "awesome-typescript-loader": "^5.2.1",
