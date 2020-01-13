@@ -4,6 +4,7 @@ const buildPath = path.resolve(__dirname, 'dist');
 const srcPath = path.resolve(__dirname, 'src');
 
 module.exports = {
+    devtool: 'source-map',
     entry: path.resolve(srcPath, 'index.ts'),
     module: {
         rules: [

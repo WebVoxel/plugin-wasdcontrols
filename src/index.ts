@@ -1,25 +1,56 @@
 import { Plugin } from '@webvoxel/core';
 import * as THREE from 'three';
-import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls';
+import { PointerLockControls } from './PointerLockControls';
+
+export interface IKeyMap {
+	left?: number;
+	right?: number;
+	forward?: number;
+	backward?: number;
+	jump?: number;
+	sneak?: number;
+}
+
+export interface IWASDControlsPluginOptions {
+	keyMap?: IKeyMap;
+}
 
 export class WASDControlsPlugin extends Plugin {
-    constructor() {
+	public prevTime: number = performance.now();
+	public velocity: THREE.Vector3 = new THREE.Vector3();
+	public direction: THREE.Vector3 = new THREE.Vector3();
+	public moveRight: boolean = false;
+	public moveLeft: boolean = false;
+	public moveForward: boolean = false;
+	public moveBackward: boolean = false;
+	public ready: boolean = false;
+	public controls?: PointerLockControls;
+	public keyMap: IKeyMap;
+
+    constructor(options?: IWASDControlsPluginOptions) {
         super('wasdcontrols');
-        this.prevTime = performance.now();
-        this.velocity = new THREE.Vector3();
-        this.direction = new THREE.Vector3();
-        this.moveRight = false;
-        this.moveLeft = false;
-        this.moveForward = false;
-        this.moveBackward = false;
-        this.ready = false;
 
 		this.onKeyDown = this.onKeyDown.bind(this);
 		this.onKeyUp = this.onKeyUp.bind(this);
+
+		const defaultKeyMap = {
+			forward: 87,
+			left: 65,
+			backward: 83,
+			right: 68,
+			sneak: 16,
+			jump: 32,
+		};
+
+		this.keyMap = {
+			...defaultKeyMap,
+			...(options && options.keyMap ? options.keyMap : {}),
+		}
     }
 
     init() {
 		this.controls = new PointerLockControls(this.game.camera, document.body);
+		this.ready = true;
         this.on('before_load', () => {
             this.game.currentWorld.scene.add(this.controls.getObject());
             document.addEventListener('keydown', this.onKeyDown, false);
@@ -27,7 +58,7 @@ export class WASDControlsPlugin extends Plugin {
             this.ready = true;
         });
 
-        this.on('animate', () => {
+        this.on('animate', (): void => {
             var time = performance.now();
             var delta = ( time - this.prevTime ) / 1000;
             this.velocity.x -= this.velocity.x * 10.0 * delta;
@@ -39,8 +70,8 @@ export class WASDControlsPlugin extends Plugin {
             this.direction.x = Number(this.moveRight) - Number(this.moveLeft);
             this.direction.normalize(); // this ensures consistent movements in all directions
 
-            if (this.moveForward || this.moveBackward) this.velocity.z -= this.direction.z * 400.0 * delta;
-            if (this.moveLeft || this.moveRight) this.velocity.x -= this.direction.x * 400.0 * delta;
+            if (this.moveForward || this.moveBackward) this.velocity.z -= this.direction.z * 100.0 * delta;
+            if (this.moveLeft || this.moveRight) this.velocity.x -= this.direction.x * 100.0 * delta;
 
             this.velocity.y = Math.max(0, this.velocity.y);
 
@@ -51,49 +82,39 @@ export class WASDControlsPlugin extends Plugin {
         });
     }
 
-    onKeyDown(event) {
+    private onKeyDown(event: KeyboardEvent) {
 		switch (event.keyCode) {
-			case 38: // up
-			case 87: // w
+			case this.keyMap.forward:
 				this.moveForward = true;
 				break;
-			case 37: // left
-			case 65: // a
+			case this.keyMap.left:
 				this.moveLeft = true;
 				break;
-			case 40: // down
-			case 83: // s
+			case this.keyMap.backward:
 				this.moveBackward = true;
 				break;
-			case 39: // right
-			case 68: // d
+			case this.keyMap.right: 
 				this.moveRight = true;
 				break;
-
 			// case 32: // space
 			// 	if ( canJump === true ) velocity.y += 350;
 			// 	canJump = false;
 			// 	break;
 		}
-
 	};
 
-	onKeyUp(event) {
+	private onKeyUp(event: KeyboardEvent) {
 		switch (event.keyCode) {
-			case 38: // up
-			case 87: // w
+			case this.keyMap.forward:
 				this.moveForward = false;
 				break;
-			case 37: // left
-			case 65: // a
+			case this.keyMap.left:
 				this.moveLeft = false;
 				break;
-			case 40: // down
-			case 83: // s
+			case this.keyMap.backward:
 				this.moveBackward = false;
 				break;
-			case 39: // right
-			case 68: // d
+			case this.keyMap.right: 
 				this.moveRight = false;
 				break;
 		}

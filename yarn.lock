@@ -172,10 +172,10 @@
     "@webassemblyjs/wast-parser" "1.8.5"
     "@xtuc/long" "4.2.2"
 
-"@webvoxel/core@^0.0.1-a5":
-  version "0.0.1-a5"
-  resolved "https://registry.yarnpkg.com/@webvoxel/core/-/core-0.0.1-a5.tgz#11c585e42f3715be5c9531bed9ef230e58a89119"
-  integrity sha512-rUtkyM2sDt5R6eMVZ+4jSIsPp/+GNsUc9Z9XOKfaxHgY2NhyCmAAEjB0KfXu6p5MjMSqh9lS8NHOrDe6tUJkNA==
+"@webvoxel/core@^0.0.1-rc1":
+  version "0.0.1-rc1"
+  resolved "https://registry.yarnpkg.com/@webvoxel/core/-/core-0.0.1-rc1.tgz#d1c3a8582d6954784b6961bec7951691d0b16044"
+  integrity sha512-o64smQMUu7XYG9U/JFxmDVHG2x4qOwbqQHdPaZg7SwT0AoURVBYdPWAMERfzs4NRwmWOcvLoWJuPQI7SKlBeVQ==
   dependencies:
     three "^0.112.0"
 
