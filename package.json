@@ -4,7 +4,8 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "0.0.1-r1",
+  "types": "src/index.d.ts",
+  "version": "0.0.1-r2",
   "description": "WASD controls for WebVoxel",
   "main": "dist/wv-plugin-wasdcontrols.min.js",
   "module": "src/index.js",
